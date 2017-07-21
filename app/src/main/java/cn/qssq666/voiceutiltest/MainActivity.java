@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
-import cn.qssq666.audio.AudioManager;
 import cn.qssq666.voiceutil.record.MediaType;
 import cn.qssq666.voiceutil.record.RecordFactory;
 import cn.qssq666.voiceutil.record.RecordManagerI;
@@ -79,14 +78,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     recordManager = RecordFactory.getAmrRocrdInstance();
                     break;
             }
-            recordManager = AudioManager.isErrorLoadSo() ? RecordFactory.getAAcRocrdInstance() : RecordFactory.getMp3RecordInstance();
             recordManager.setOnTimeSecondChanage(new RecordManagerI.OnTimeSecondChanage() {
                 @Override
                 public void onSecondChnage(int duration) {
-                    int time = duration * 1000;
-                    String s = generateTime(time);
-                    tvTitle.setText("" + s + ",time:" + time);
-                    Log.w(TAG, "" + s);
+                    int second = duration /1000;
+                    String textTime = generateTime(duration);
+                    tvTitle.setText("" + textTime + "");
+                    Log.w(TAG, "录制的时常秒:" + second);
                     mDuration = duration;
                 }
             });
@@ -138,12 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (recordManager != null) {
-            if (recordManager.isRecordIng()) {
-                recordManager.setOnTimeOutStopListener(null);
-                recordManager.stopRecord();
-            }
-        }
+       RecordFactory.release(recordManager);
         PlayEngine.destory();
     }
 
@@ -152,9 +145,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btn_start:
                 if (getRecordManager().isRecordIng()) {//在录制中
-                    if (getRecordManager().getCurrenttime() < 5) {//小于5秒不鸟
+                    if (getRecordManager().getCurrenttime() < 2) {//小于5秒不鸟
+                        Toast.makeText(this, "录音时间太短", Toast.LENGTH_SHORT).show();
                     } else {
                         getRecordManager().stopRecord();//否则停止
+//                        setRecordState(false);
                     }
                 } else {//不再录制中 开始新的录制
                     try {
@@ -199,23 +194,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "复制路径成功 ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_aac:
+                RecordFactory.release(recordManager);
                 recordManager = null;
                 mediaType = MediaType.AAC;
                 break;
             case R.id.tv_wav_mp3:
+                RecordFactory.release(recordManager);
                 recordManager = null;
                 mediaType = MediaType.WAV_TO_MP3;
                 break;
             case R.id.tv_mp3:
+                RecordFactory.release(recordManager);
                 recordManager = null;
                 mediaType = MediaType.MP3;
                 break;
 
             case R.id.tv_wav:
+                RecordFactory.release(recordManager);
                 recordManager = null;
                 mediaType = MediaType.WAV;
                 break;
             case R.id.tv_amr:
+                RecordFactory.release(recordManager);
                 recordManager = null;
                 mediaType = MediaType.AMR;
                 break;

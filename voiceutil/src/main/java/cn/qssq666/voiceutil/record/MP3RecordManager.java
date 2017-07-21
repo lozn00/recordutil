@@ -202,7 +202,7 @@ public class MP3RecordManager implements RecordManagerI {
                 currenttime++;
                 mHandler.postDelayed(this, 1000);//1秒一次
                 if (onTimeSecondChanage != null) {
-                    onTimeSecondChanage.onSecondChnage(currenttime);
+                    onTimeSecondChanage.onSecondChnage(1000*currenttime);
                 }
             } else {
 

@@ -66,7 +66,7 @@ public class AmrRecorderManager implements RecordManagerI {
                 currenttime++;
                 mHandler.postDelayed(this, 1000);//1秒一次
                 if (onTimeSecondChanage != null) {
-                    onTimeSecondChanage.onSecondChnage(currenttime);
+                    onTimeSecondChanage.onSecondChnage(1000 * currenttime);
                 }
             } else {
                 stopRecord();
@@ -151,10 +151,10 @@ public class AmrRecorderManager implements RecordManagerI {
 //        ActionEngine.abandonAudioFocus();
         record_state = RECORD_STATE.STOP;
         boolean result;
+        mHandler.removeCallbacks(mUpdateMicStatusTimer);
+        mHandler.removeCallbacks(mAddTimeRunnnable);
         if (mediaRecorder != null) {
             try {
-                mHandler.removeCallbacks(mUpdateMicStatusTimer);
-                mHandler.removeCallbacks(mAddTimeRunnnable);
 
                 mediaRecorder.stop();
                 mediaRecorder.release();

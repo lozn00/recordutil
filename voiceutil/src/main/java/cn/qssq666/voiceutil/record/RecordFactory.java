@@ -24,4 +24,14 @@ public class RecordFactory {
     public static RecordManagerI getWavRecordMp3OutInstance() {
         return new Mp3RecordFromWavManager();
     }
+
+    public static void release(RecordManagerI recordManager) {
+        if (recordManager != null) {
+            if (recordManager.isRecordIng()) {
+                recordManager.stopRecord();
+                recordManager.setOnTimeOutStopListener(null);
+            }
+        }
+
+    }
 }

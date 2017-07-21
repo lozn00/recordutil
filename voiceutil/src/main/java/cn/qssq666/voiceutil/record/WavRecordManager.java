@@ -33,7 +33,7 @@ public class WavRecordManager implements RecordManagerI {
                 currenttime++;
                 mHandler.postDelayed(this, 1000);//1秒一次
                 if (onTimeSecondChanage != null) {
-                    onTimeSecondChanage.onSecondChnage(currenttime);
+                    onTimeSecondChanage.onSecondChnage(1000 * currenttime);
                 }
             } else {
 
@@ -113,19 +113,17 @@ public class WavRecordManager implements RecordManagerI {
 
     OnTimeSecondChanage onTimeSecondChanage;
     OnTimeOutStopListener onTimeOutStopListener;
+
     @Override
     public void setSoundAmplitudeListenr(SoundAmplitudeListenr soundAmplitudeListenr) {
 
     }
 
 
-
     @Override
     public void setOnTimeOutStopListener(OnTimeOutStopListener onTimeOutStopListener) {
         this.onTimeOutStopListener = onTimeOutStopListener;
     }
-
-
 
 
     @Override
@@ -143,8 +141,9 @@ public class WavRecordManager implements RecordManagerI {
     public File getFile() {
         return wavFile;
     }
-    public void setFile(File file){
-        wavFile=file;
+
+    public void setFile(File file) {
+        wavFile = file;
     }
 
 
