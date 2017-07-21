@@ -17,3 +17,5 @@ gradlew
 /app/*.apk
 /voiceutil/*.iml
 *.bat
+/.gradle
+/gradle
