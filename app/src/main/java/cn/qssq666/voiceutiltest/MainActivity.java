@@ -80,15 +80,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
             }
             recordManager = AudioManager.isErrorLoadSo() ? RecordFactory.getAAcRocrdInstance() : RecordFactory.getMp3RecordInstance();
-//            recordManager = RecordFactory.getMp3RecordInstance();
-//            recordManager = RecordFactory.getAAcRocrdInstance();
             recordManager.setOnTimeSecondChanage(new RecordManagerI.OnTimeSecondChanage() {
                 @Override
                 public void onSecondChnage(int duration) {
-//                    tvSecond.setText("" + duration + "s");
                     int time = duration * 1000;
                     String s = generateTime(time);
-
                     tvTitle.setText("" + s + ",time:" + time);
                     Log.w(TAG, "" + s);
                     mDuration = duration;
@@ -107,11 +103,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     setRecordState(false);
-                /*    audioManager.convertmp3(mAudioFile.getAbsolutePath(), tempCacheMp3FileName.getAbsolutePath());
-                    if (BuildConfig.DEBUG) {
-                        mAudioFile = tempCacheMp3FileName;
-                    }
-*/
                 }
             });
         }
