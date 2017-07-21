@@ -1,7 +1,7 @@
 
  图片演示
 
-![演示图片地址](https://github.com/qssq/giftanim/blob/master/Pictures/1.gif)
+![演示图片地址](https://github.com/qssq/recordutil/blob/master/Pictures/1.gif)
 
 ##### 使用方法
 
