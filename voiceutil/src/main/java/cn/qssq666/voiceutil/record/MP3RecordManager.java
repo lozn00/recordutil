@@ -45,7 +45,7 @@ public class MP3RecordManager implements RecordManagerI {
      */
     private static final int FRAME_COUNT = 160;
 
-    public AudioRecord getAudioRecord() {
+    public AudioRecord getInternAudioRecord() {
         return mAudioRecord;
     }
 

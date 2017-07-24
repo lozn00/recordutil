@@ -16,7 +16,7 @@ public class AmrRecorderManager implements RecordManagerI {
 
     private File file;//录音文件
 
-    public MediaRecorder getAudioRecord() {
+    public MediaRecorder getInternAudioRecord() {
         return mediaRecorder;
     }
 

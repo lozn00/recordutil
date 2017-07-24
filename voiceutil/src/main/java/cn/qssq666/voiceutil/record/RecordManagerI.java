@@ -18,7 +18,12 @@ public interface RecordManagerI {
 
     public void setOnTimeOutStopListener(RecordManagerI.OnTimeOutStopListener onTimeOutStopListener);
 
-    public Object getAudioRecord();
+    /**
+     * 获取内部管理器 通常返回的是 {@link android.media.AudioRecord }或 {@link android.media.MediaRecorder}
+     *
+     * @return
+     */
+    public Object getInternAudioRecord();
 
     public boolean isRecordIng();
 

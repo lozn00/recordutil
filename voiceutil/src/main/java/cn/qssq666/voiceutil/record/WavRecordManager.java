@@ -125,6 +125,11 @@ public class WavRecordManager implements RecordManagerI {
         this.onTimeOutStopListener = onTimeOutStopListener;
     }
 
+    @Override
+    public Object getInternAudioRecord() {
+        return recorder;
+    }
+
 
     @Override
     public boolean isRecordIng() {

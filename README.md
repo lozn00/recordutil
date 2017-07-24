@@ -41,7 +41,7 @@ RecordFactory
 
 如果要拿到具体的MediaRecorder 类 比如Amr的， 可以直接强转AmrRecorderManager 然后 getMediaRecorder()
 
-工厂返回的录音接口类 接口类已被上面4个音频管理器类实现，可以直接进行强转拿如果要拿到具体的MediaRecorder 也可以直接从工厂的getAudioRecord 返回的Object对象强转具体的AudioRecord/MediaRecorder对象。
+工厂返回的录音接口类 接口类已被上面4个音频管理器类实现，可以直接进行强转拿如果要拿到具体的MediaRecorder 也可以直接从工厂的getInternAudioRecord()返回的Object对象强转具体的AudioRecord/MediaRecorder对象。
 
 
 ```
