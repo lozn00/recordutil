@@ -25,8 +25,25 @@ maven
 
 
 支持录制amr,wav,mp3,aac，只需要改变工厂方法即可，都是一个抽象实现，因此用户轻松切换解决boss的变动需求。
+提供了如下管理器
+AACMediaRecorderManager
 
-录音接口类
+AmrRecorderManager
+
+MP3RecordManager
+
+Mp3RecordFromWavManager
+WavRecordManager
+
+
+建议使用工厂的方式，这样切换录音格式只需要改一句工厂代码就行。
+RecordFactory
+
+如果要拿到具体的MediaRecorder 类 比如Amr的， 可以直接强转AmrRecorderManager 然后 getMediaRecorder()
+
+工厂返回的录音接口类 接口类已被上面4个音频管理器类实现，可以直接进行强转拿如果要拿到具体的MediaRecorder 也可以直接从工厂的getAudioRecord 返回的Object对象强转具体的AudioRecord/MediaRecorder对象。
+
+
 ```
 public interface RecordManagerI {
     public boolean startRecordCreateFile(int stopTime) throws IOException;
@@ -166,3 +183,4 @@ demo中部分代码
          return recordManager;
      }
 ```
+

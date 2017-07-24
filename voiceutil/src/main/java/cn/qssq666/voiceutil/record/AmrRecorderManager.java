@@ -16,9 +16,10 @@ public class AmrRecorderManager implements RecordManagerI {
 
     private File file;//录音文件
 
-    public MediaRecorder getMediaRecorder() {
+    public MediaRecorder getAudioRecord() {
         return mediaRecorder;
     }
+
 
     public boolean isRecordIng() {
         return record_state == RECORD_STATE.RECORDING;

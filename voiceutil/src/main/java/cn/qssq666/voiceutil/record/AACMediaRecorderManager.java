@@ -12,10 +12,11 @@ import cn.qssq666.voiceutil.utils.MediaDirectoryUtils;
 
 public class AACMediaRecorderManager extends AmrRecorderManager {
     @Override
-    protected File getNewFile(){
+    protected File getNewFile() {
         File temp = MediaDirectoryUtils.getTempAACFileName();
         return temp;
     }
+
     @Override
     protected void setMediaOutFormatAndEncoder(MediaRecorder encoder) {
         encoder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);

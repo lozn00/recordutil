@@ -44,6 +44,13 @@ public class MP3RecordManager implements RecordManagerI {
      * 自定义 每160帧作为一个周期，通知一下需要进行编码
      */
     private static final int FRAME_COUNT = 160;
+
+    public AudioRecord getAudioRecord() {
+        return mAudioRecord;
+    }
+
+
+
     private AudioRecord mAudioRecord = null;
     private int mBufferSize;
     private short[] mPCMBuffer;
@@ -202,7 +209,7 @@ public class MP3RecordManager implements RecordManagerI {
                 currenttime++;
                 mHandler.postDelayed(this, 1000);//1秒一次
                 if (onTimeSecondChanage != null) {
-                    onTimeSecondChanage.onSecondChnage(1000*currenttime);
+                    onTimeSecondChanage.onSecondChnage(1000 * currenttime);
                 }
             } else {
 

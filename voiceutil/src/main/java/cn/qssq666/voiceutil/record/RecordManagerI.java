@@ -18,6 +18,8 @@ public interface RecordManagerI {
 
     public void setOnTimeOutStopListener(RecordManagerI.OnTimeOutStopListener onTimeOutStopListener);
 
+    public Object getAudioRecord();
+
     public boolean isRecordIng();
 
     public int getCurrenttime();
