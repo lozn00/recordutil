@@ -5,10 +5,25 @@
 
 ##### 使用方法
 
+gradle
 ```
  compile 'cn.qssq666:recordutil:0.1'//duration为秒
   compile 'cn.qssq666:recordutil:0.2' //回调duration由秒改成毫秒
+
+
 ```
+
+maven
+
+```
+<dependency>
+  <groupId>cn.qssq666</groupId>
+  <artifactId>recordutil</artifactId>
+  <version>0.2</version>
+  <type>pom</type>
+</dependency>
+```
+
 
 支持录制amr,wav,mp3,aac，只需要改变工厂方法即可，都是一个抽象实现，因此用户轻松切换解决boss的变动需求。
 
