@@ -49,21 +49,21 @@ public class MediaDirectoryUtils {
     }
 
     public static File getTempCacheWavFileName() {
-        if(mediaManagerProvider!=null&&mediaManagerProvider.getTempCacheWavFileName()!=null){
+        if (mediaManagerProvider != null && mediaManagerProvider.getTempCacheWavFileName() != null) {
             return mediaManagerProvider.getTempCacheWavFileName();
         }
         return getTempCacheFileName(".wav");
     }
 
     public static File getTempCachePcmFileName() {
-        if(mediaManagerProvider!=null&&mediaManagerProvider.getTempCachePcmFileName()!=null){
+        if (mediaManagerProvider != null && mediaManagerProvider.getTempCachePcmFileName() != null) {
             return mediaManagerProvider.getTempCachePcmFileName();
         }
         return getTempCacheFileName(".pcm");
     }
 
     public static File getTempMp3FileName() {
-        if(mediaManagerProvider!=null&&mediaManagerProvider.getTempMp3FileName()!=null){
+        if (mediaManagerProvider != null && mediaManagerProvider.getTempMp3FileName() != null) {
             return mediaManagerProvider.getTempMp3FileName();
         }
         File tempCacheFileName = getTempCacheFileName(".mp3");
@@ -72,14 +72,14 @@ public class MediaDirectoryUtils {
     }
 
     public static File getTempAACFileName() {
-        if(mediaManagerProvider!=null&&mediaManagerProvider.getTempAACFileName()!=null){
+        if (mediaManagerProvider != null && mediaManagerProvider.getTempAACFileName() != null) {
             return mediaManagerProvider.getTempAACFileName();
         }
         return getTempCacheFileName(".aac");
     }
 
     public static File getTempAmrFileName() {
-        if(mediaManagerProvider!=null&&mediaManagerProvider.getTempAmrFileName()!=null){
+        if (mediaManagerProvider != null && mediaManagerProvider.getTempAmrFileName() != null) {
             return mediaManagerProvider.getTempAmrFileName();
         }
         return getTempCacheFileName(".amr");
@@ -103,14 +103,23 @@ public class MediaDirectoryUtils {
     @NonNull
     public static File getCachePath() {
 
+        if (mediaManagerProvider != null && mediaManagerProvider.getCachePath() != null) {
+            return mediaManagerProvider.getCachePath();
+        }
+
         return getAppPath(cacheStr);
     }
 
 
     private static String productSimpleFileName(String postfix) {
+
+
+        if (mediaManagerProvider != null && mediaManagerProvider.productFileName(postfix) != null) {
+            return mediaManagerProvider.productFileName(postfix);
+        }
         Date date = new Date(System.currentTimeMillis()); //2016-01-28 12:02:28  14位年月日
-        SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmssSSS");
-        return sdf.format(date) + MediaDirectoryUtils.getRandom(2) + postfix;//(2017 02 23 17 38 23 1
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        return sdf.format(date) + MediaDirectoryUtils.getRandom(3) + postfix;//(2017 02 23 17 38 23 1
 //        return sdf.format(date) + MediaUtils.getRandom(1) + postfix;//(2017 02 23 17 38 23 1
     }
 
@@ -144,11 +153,20 @@ public class MediaDirectoryUtils {
         File getTempAACFileName();
 
         File getTempCachePcmFileName();
+
+        /**
+         * 缓存根目录
+         *
+         * @return
+         */
+        File getCachePath();
+
+        String productFileName(String postfix);
     }
 
     public static void setMediaManagerProvider(MediaManagerProvider mediaManagerProvider) {
         MediaDirectoryUtils.mediaManagerProvider = mediaManagerProvider;
     }
 
-   static MediaManagerProvider mediaManagerProvider;
+    static MediaManagerProvider mediaManagerProvider;
 }

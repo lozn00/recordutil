@@ -52,6 +52,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_mp3).setOnClickListener(this);
         findViewById(R.id.tv_wav).setOnClickListener(this);
         boolean mkdirs = MediaDirectoryUtils.getCachePath().mkdirs();
+        MediaDirectoryUtils.setMediaManagerProvider(new MediaDirectoryUtils.MediaManagerProvider() {
+            @Override
+            public File getTempCacheWavFileName() {
+                return null;
+            }
+
+            @Override
+            public File getTempAmrFileName() {
+                return null;
+            }
+
+            @Override
+            public File getTempMp3FileName() {
+                return null;
+            }
+
+            @Override
+            public File getTempAACFileName() {
+                return null;
+            }
+
+            @Override
+            public File getTempCachePcmFileName() {
+                return null;
+            }
+
+            @Override
+            public File getCachePath() {
+                return null;//存储目录可以自定义逻辑，我这里是磁盘的某个文件夹
+            }
+
+            @Override
+            public String productFileName(String postfix) {
+                return null;//这里是控制文件名生成格式 某些服务器端比较变态让你们这边修改
+            }
+        });
         if (!mkdirs) {
             Toast.makeText(this, "没有创建文件的权限", Toast.LENGTH_SHORT).show();
         }
@@ -81,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             recordManager.setOnTimeSecondChanage(new RecordManagerI.OnTimeSecondChanage() {
                 @Override
                 public void onSecondChnage(int duration) {
-                    int second = duration /1000;
+                    int second = duration / 1000;
                     String textTime = generateTime(duration);
                     tvTitle.setText("" + textTime + "");
                     Log.w(TAG, "录制的时常秒:" + second);
@@ -136,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       RecordFactory.release(recordManager);
+        RecordFactory.release(recordManager);
         PlayEngine.destory();
     }
 

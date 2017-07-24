@@ -7,8 +7,7 @@
 
 gradle
 ```
- compile 'cn.qssq666:recordutil:0.1'//duration为秒
-  compile 'cn.qssq666:recordutil:0.2' //回调duration由秒改成毫秒
+ compile 'cn.qssq666:recordutil:0.1'//回调duration由秒改成毫秒
 
 
 ```
@@ -73,31 +72,41 @@ public interface RecordManagerI {
 ```
 
  MediaDirectoryUtils.setMediaManagerProvider(new MediaDirectoryUtils.MediaManagerProvider() {
-                                                         @Override
-                                                         public File getTempCacheWavFileName() {
-                                                             return null;
-                                                         }
-                                             
-                                                         @Override
-                                                         public File getTempAmrFileName() {
-                                                             return null;
-                                                         }
-                                             
-                                                         @Override
-                                                         public File getTempMp3FileName() {
-                                                             return null;
-                                                         }
-                                             
-                                                         @Override
-                                                         public File getTempAACFileName() {
-                                                             return null;
-                                                         }
-                                             
-                                                         @Override
-                                                         public File getTempCachePcmFileName() {
-                                                             return null;
-                                                         }
-                                                     });
+             @Override
+             public File getTempCacheWavFileName() {
+                 return null;
+             }
+ 
+             @Override
+             public File getTempAmrFileName() {
+                 return null;
+             }
+ 
+             @Override
+             public File getTempMp3FileName() {
+                 return null;
+             }
+ 
+             @Override
+             public File getTempAACFileName() {
+                 return null;
+             }
+ 
+             @Override
+             public File getTempCachePcmFileName() {
+                 return null;
+             }
+ 
+             @Override
+             public File getCachePath() {
+                 return null;//存储目录可以自定义逻辑，我这里是磁盘的某个文件夹
+             }
+ 
+             @Override
+             public String productFileName(String postfix) {
+                 return null;//这里是控制文件名生成格式 某些服务器端比较变态让你们这边修改
+             }
+         });
  
 ```
 
