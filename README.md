@@ -184,3 +184,44 @@ demo中部分代码
      }
 ```
 
+其它注意事项
+======
+
+混淆问题
+---
+m3p录制使用了jni 因此要保持这个不能被混淆
+
+```-keep class cn.qssq666.audio.AudioManager{*;}```
+
+如果完全不需要mp3录制
+android节点加上
+```
+packagingOptions {
+        exclude "lib/arm64-v8a/libmp3lame.so"
+        exclude "lib/armeabi-v7a/libmp3lame.so"
+        exclude "lib/x86/libmp3lame.so"
+        exclude "lib/x86_64/libmp3lame.so"
+        exclude "lib/mips/libmp3lame.so"
+        exclude "lib/mips64/libmp3lame.so"
+    }
+    
+```
+
+
+
+```
+<!-- -libraryjars ../XXX(此处为library名称)/src/main/jniLibs/x86/xxxxx.so -->
+```
+
+关于平台so优化问题.
+--------
+
+建议设置为一个so,这样可以节省不少体积
+```
+  ndk {
+
+            //APP的build.gradle设置支持的SO库架构
+
+            abiFilters 'armeabi-v7a'
+        }
+```
